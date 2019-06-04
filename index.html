@@ -28,13 +28,21 @@
         
         var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
+        // Copying these vars over from a jquery exercise, so i'm not sure if the syntax is correct. Investigate once the real problem is solved.
+
+        var winNum = 0;
+
+        var lossNum = 0;
+
+        var Guesses = 9;
+
         document.onkeyup = function(event){
 
             var playerGuess = event.key;
 
             var compGuess = alpha[Math.floor(Math.random() * alpha.length)];
 
-            // Problem. Although functional, this code only returns correct guesses regardless of the key pressed. I've made some signifigant progress so far, so for now I'll push my changes and shut down for now.
+            // Problem. Although functional, this code only returns correct guesses regardless of the key pressed. I've made some signifigant progress so far, so for now I'll push my changes and shut down.
 
             if (playerGuess = compGuess){
 
