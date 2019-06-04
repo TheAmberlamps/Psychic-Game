@@ -4,9 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Psychic Game</title>
 </head>
 <body>
+   
+    <h1>The Psychic Game</h1>
+
+    <div id="game">
+
+        <p>Guess what letter I'm thinking of.</p>
+
+        <p>Wins: <span id="winNum"></span></p>
+
+        <p>Losses: <span id="lossNum"></span></p>
+
+        <p>Guesses Left: <span id="Guesses"></span></p>
+
+        <p>Your guesses so far: </p>
+
+    </div>
+
+        <script type=text/javascript>
+        
+        var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+        document.onkeyup = function(event){
+
+            var playerGuess = event.key;
+
+            var compGuess = alpha[Math.floor(Math.random() * alpha.length)];
+
+            // Problem. Although functional, this code only returns correct guesses regardless of the key pressed. I've made some signifigant progress so far, so for now I'll push my changes and shut down for now.
+
+            if (playerGuess = compGuess){
+
+                console.log("It's a winner!");
+                
+                console.log("Now the win value should increase by 1 and the guesses left and printed guesses should reset.");
+
+            }
+
+            else {
+
+                console.log("Incorrect");
+
+                console.log("Now the guesses left should decrease by 1, and the guess should be printed.");
+
+            }
+        }
+
+        </script>
 
     
     
