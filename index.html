@@ -14,13 +14,13 @@
 
         <p>Guess what letter I'm thinking of.</p>
 
-        <p>Wins: <span id="winNum"></span></p>
+        <p>Wins: <span id="winNum">0</span></p>
 
-        <p>Losses: <span id="lossNum"></span></p>
+        <p>Losses: <span id="lossNum">0</span></p>
 
-        <p>Guesses Left: <span id="Guesses"></span></p>
+        <p>Guesses Left: <span id="guesses">9</span></p>
 
-        <p>Your guesses so far: </p>
+        <p>Your guesses so far: <span id="guessPrint"></span></p>
 
     </div>
 
@@ -28,35 +28,82 @@
         
         var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
-        // Copying these vars over from a jquery exercise, so i'm not sure if the syntax is correct. Investigate once the real problem is solved.
+        var compGuess = alpha[Math.floor(Math.random() * alpha.length)];
 
-        var winNum = 0;
+        // These vars hold the game values
 
-        var lossNum = 0;
+        var wins = 0;
 
-        var Guesses = 9;
+        var losses = 0;
+
+        var guesses = 9;
+
+        // Ok, time to write some vars to push values to the various locations they should be appearing.
+
+        var winsText = document.getElementById("winNum")
+
+        var lossText = document.getElementById("lossNum")
+
+        var guessNum = document.getElementById("guesses")
+
+        var guessText = document.getElementById("guessPrint")
+
+        // And now for the on-click action.
 
         document.onkeyup = function(event){
 
             var playerGuess = event.key;
 
-            var compGuess = alpha[Math.floor(Math.random() * alpha.length)];
+            // So initially compGuess was down here, and I couldn't understand what was going wrong. Of course I eventually realised that it was being reused every time a key was being pressed, contantly changing the computer's guess.
 
-            // Problem. Although functional, this code only returns correct guesses regardless of the key pressed. I've made some signifigant progress so far, so for now I'll push my changes and shut down.
+            // var compGuess = alpha[Math.floor(Math.random() * alpha.length)];
 
-            if (playerGuess = compGuess){
+            // I think this was malfunctioning earlier because the statement wasn't strict enough, but it may have been because compGuess was getting executed on every keystroke.
+
+            if (playerGuess === compGuess){
 
                 console.log("It's a winner!");
+
+                wins++;
+
+                guesses = 9;
+
+                winsText.textContent = wins;
                 
                 console.log("Now the win value should increase by 1 and the guesses left and printed guesses should reset.");
 
+                console.log(wins);
+
             }
+
+            // this shit introduces a new statement for else to sort out. try putting this functionality into a for loop instead, since that should be an absolute statement.
+
+            // if (guesses === 1){
+
+            //     losses++;
+            //     guesses = 9;
+
+            //     lossText.textContent = losses;
+
+            //     console.log("loooooooser");
+
+            //     console.log(guesses);
+
+            // }
 
             else {
 
                 console.log("Incorrect");
 
+                guessText.textContent = event.key;
+
+                guesses--;
+
+                guessNum.textContent = guesses;
+
                 console.log("Now the guesses left should decrease by 1, and the guess should be printed.");
+
+                console.log(guesses);
 
             }
         }
