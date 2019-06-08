@@ -1,8 +1,10 @@
-var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        // Here's the array that the computer uses to determine what the answer id, and the randomizer function.
+
+        var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
         var compGuess = alpha[Math.floor(Math.random() * alpha.length)];
 
-        // These vars hold the game values
+        // These variables hold the game values.
 
         var wins = 0;
 
@@ -10,7 +12,7 @@ var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 
         var guesses = 9;
 
-        // Ok, time to write some vars to push values to the various locations they should be appearing.
+        // These variables hold the locations I want to use to display information as the game is played.
 
         var winsText = document.getElementById("winNum")
 
@@ -19,6 +21,11 @@ var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
         var guessNum = document.getElementById("guesses")
 
         var guessText = document.getElementById("guessPrint")
+
+        // ...and this is a sound to congratulate you on winning.
+
+        var audioElement = document.createElement("audio");
+        audioElement.setAttribute("src", "assets/sounds/clap.mp3");
 
     //    not only did this not work as intended, it seems to have broken my if statement.
 
@@ -43,12 +50,10 @@ var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 
             var playerGuess = event.key;
 
-            // So initially compGuess was down here, and I couldn't understand what was going wrong. Of course I eventually realised that it was being reused every time a key was being pressed, contantly changing the computer's guess.
+            // So initially I put compGuess here, and I couldn't understand what was going wrong. Of course I eventually realised that it was being reused every time a key was being pressed, constantly changing the computer's guess.
 
-            // var compGuess = alpha[Math.floor(Math.random() * alpha.length)];
 
-            // I think this was malfunctioning earlier because the statement wasn't strict enough, but it may have been because compGuess was getting executed on every keystroke.
-            
+            // This is the guts of the game. Everything else up until now has just been defining rules and default values.
 
             if (playerGuess === compGuess){
                 
@@ -61,14 +66,18 @@ var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
                 guessNum.textContent = guesses;
 
                 guessText.textContent = "";
+
+                alert("Winner!");
+
+                audioElement.play();
                 
-                console.log("Now the win value should increase by 1 and the guesses left and printed guesses should reset.");
+                // console.log("Now the win value should increase by 1 and the guesses left and printed guesses should reset.");
                 
-                console.log(wins);
-                
+                // console.log(wins);
+    
                 compGuess = alpha[Math.floor(Math.random() * alpha.length)];
 
-                console.log(compGuess);
+                // console.log(compGuess);
             }
 
             else if (guesses === 1) {
@@ -83,33 +92,31 @@ var alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 
                 guessText.textContent = "";
 
-                console.log("looooooooser");
+                alert("Looooooooser");
 
-                console.log("Now the loss counter should increase by 1, and the guesses should return to 9.")
+                // console.log("Now the loss counter should increase by 1, and the guesses should return to 9.")
 
                 compGuess = alpha[Math.floor(Math.random() * alpha.length)];
 
-                console.log(compGuess);
+                // console.log(compGuess);
 
             }
 
             else {
-
-                console.log("Incorrect");
-
-                // guessText.textContent = event.key;
-
+                
                 var TextTest = document.createTextNode(event.key);
-
+                
                 guessText.appendChild(TextTest);
-
+                
                 guesses--;
-
+                
                 guessNum.textContent = guesses;
+                
+                // console.log("Incorrect");
+                
+                // console.log("Now the guesses left should decrease by 1, and the guess should be printed.");
 
-                console.log("Now the guesses left should decrease by 1, and the guess should be printed.");
-
-                console.log(guesses);
+                // console.log(guesses);
 
             }
         }
